@@ -4,7 +4,7 @@ import axios from "axios";
 
 function PieChart(props) {
   const [data, setdata] = useState([]);
-  const { outerRadius = 150, innerRadius = 75 } = props;
+  const { outerRadius = 300, innerRadius = 150 } = props;
 
   const margin = {
     top: 5,
