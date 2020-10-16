@@ -7,10 +7,10 @@ function PieChart(props) {
   const { outerRadius = 300, innerRadius = 150 } = props;
 
   const margin = {
-    top: 5,
-    right: 5,
-    bottom: 5,
-    left: 5,
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 10,
   };
 
   const width = 2 * outerRadius + margin.left + margin.right;
@@ -18,20 +18,16 @@ function PieChart(props) {
 
   const colorScale = d3
     .scaleSequential()
-    .interpolator(d3.interpolateWarm)
+    .interpolator(d3.interpolateCool)
     .domain([0, data.length]);
 
   useEffect(() => {
-    if(data.length === 0){
       axios.get("http://localhost:3001/budget").then((res) => {
         var data = res.data.myBudget;
         setdata(data);
       });
-    }
-  
-    if (data.length > 0) {
+
       drawChart();
-    }
   });
 
   function drawChart() {
