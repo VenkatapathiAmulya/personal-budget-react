@@ -12,6 +12,7 @@ import HomePage from './HomePage/HomePage';
 import Footer from './Footer/Footer';
 import AboutPage from './AboutPage/AboutPage';
 import LoginPage from './LoginPage/LoginPage';
+import PieChart from './PieChart/PieChart';
 function App() {
   return (
     <Router >
@@ -29,6 +30,7 @@ function App() {
         <HomePage/>
         </Route>
       </Switch>
+      <PieChart></PieChart>
       <Footer></Footer>
       
     </Router>

@@ -1,7 +1,42 @@
-import React from 'react';
+import React, { useEffect } from "react";
 //import './App.css';
+import Chart from 'chart.js';
+import axios from 'axios';
+
 
 function HomePage() {
+    var dataSource= {
+        labels: [],
+        datasets: [
+          {
+            label: "# of Votes",
+            data: [],
+            backgroundColor: [
+                "#ffcd56", "#ff6384","#36a2eb", "#fd6b19","#fdfd19", "#189c40", "#04350c", "#652e7a"
+            ],
+            borderColor: ["#ffcd56", "#ff6384","#36a2eb", "#fd6b19","#fdfd19", "#189c40", "#04350c", "#652e7a"],
+            borderWidth: 1
+          }
+        ]
+      }
+    useEffect(() => {
+        
+        axios.get('http://localhost:3001/budget')
+        .then((res)=>{
+            console.log(res.data);
+            for(var i=0;i<res.data.myBudget.length;i++) {
+                dataSource.datasets[0].data[i]=res.data.myBudget[i].budget;
+                dataSource.labels[i]=res.data.myBudget[i].title;
+            }
+
+
+        const ctx = document.getElementById("myChart");
+        new Chart(ctx, {
+          type: "pie",
+         data : dataSource
+        });
+    })
+      });
   return (
     <main className="center">
     <div className="_inline-block" >   
@@ -61,9 +96,11 @@ function HomePage() {
                 </p>
             </article>
         <article>
+            <h1>
             <p>
                 <canvas id="myChart" width="400" height="400"></canvas>
             </p>
+            </h1>
         </article>
     </div>
 
